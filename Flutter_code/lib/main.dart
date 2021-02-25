@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
+import 'package:flutter_app_test/classifier/classifier.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +33,9 @@ class _HomeState extends State<Home> {
   final picker = ImagePicker();
   String prediction = 'no';
   PickedFile image;
+  Classifier classifier = Classifier();
   var flag = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +46,15 @@ class _HomeState extends State<Home> {
         onPressed: () async {
           image = await picker.getImage(
             source: ImageSource.gallery,
-            maxHeight: 128,
-            maxWidth: 128,
+            maxHeight: 300,
+            maxWidth: 300,
             imageQuality: 100,
           );
-          //classifier
           flag = true;
-          setState(() {
-
-          });
+          //classifier
+          //prediction = await classifier.classifyImage(image);
+          setState(() {},
+          );
         },
       ),
       appBar: AppBar(
@@ -78,12 +80,13 @@ class _HomeState extends State<Home> {
               width: 400,
               height: 400,
               decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey, width: 4),
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: flag? FileImage(File(image.path)) : AssetImage('./assets/white_background.jpg'),
-                )
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey, width: 4),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: flag ? FileImage(File(image.path)) : AssetImage(
+                        './assets/white_background.jpg'),
+                  )
               ),
             ),
             SizedBox(
@@ -110,5 +113,5 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-    }
   }
+}
