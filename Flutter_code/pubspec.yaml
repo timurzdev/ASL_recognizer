@@ -53,6 +53,7 @@ flutter:
   assets:
       - assets/white_background.jpg
       - assets/model.tflite
+      - assets/modelV2.tflite
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

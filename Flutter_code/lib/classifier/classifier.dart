@@ -47,7 +47,7 @@ Future<String> predicition(Uint8List imgAsList) async {
   //InterpreterOptions interpreterOptions = InterpreterOptions();
 
   try {
-    final interpreter = await Interpreter.fromAsset('model.tflite');
+    final interpreter = await Interpreter.fromAsset('modelV2.tflite');
     interpreter.run(input, output);
   } catch (e) {
     print("Error running model: " + e.toString());
