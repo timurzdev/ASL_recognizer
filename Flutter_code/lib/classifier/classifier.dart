@@ -8,9 +8,9 @@ import 'dart:io' as io;
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as img;
 
-const List<String> predictionsMap = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I',
-  'J', 'K', 'L', 'M', 'N', 'nothing', 'O', 'P', 'Q',
-  'R', 'S','space','T', 'U', 'V', 'W', 'X', 'Y','Z'];
+const List<String> predictionsMap = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+  'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+  'W', 'X', 'Y', 'Z', 'nothing', 'space', 'del'];
 
 
 class Classifier {
