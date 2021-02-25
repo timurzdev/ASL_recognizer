@@ -31,6 +31,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final picker = ImagePicker();
+  String prediction = 'no';
   PickedFile image;
   var flag = false;
   @override
@@ -56,17 +57,21 @@ class _HomeState extends State<Home> {
       ),
       appBar: AppBar(
         title: Text("ASL recognizer"),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.black,
       ),
       body: Align(
         alignment: Alignment.center,
         child: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Text(
-              'Your image'
+              'Your image',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
             SizedBox(height: 20,),
             Container(
@@ -79,6 +84,26 @@ class _HomeState extends State<Home> {
                   fit: BoxFit.fill,
                   image: flag? FileImage(File(image.path)) : AssetImage('./assets/white_background.jpg'),
                 )
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Prediction:',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              prediction,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
               ),
             )
           ],
