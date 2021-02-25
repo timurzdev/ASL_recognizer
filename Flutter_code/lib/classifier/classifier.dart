@@ -1,13 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'dart:typed_data';
 import 'package:tflite_flutter/tflite_flutter.dart';
+//import 'package:tflite/tflite.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io' as io;
 import 'dart:ui' as ui;
 import 'package:image/image.dart' as img;
 
-const List<String> predsMap = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I',
+const List<String> predictionsMap = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I',
   'J', 'K', 'L', 'M', 'N', 'nothing', 'O', 'P', 'Q',
   'R', 'S','space','T', 'U', 'V', 'W', 'X', 'Y','Z'];
 
@@ -40,15 +41,13 @@ Future<String> predicition(Uint8List imgAsList) async {
     index += 3;
   }
 
-  var input = resultBytes.reshape([1, 128, 128, 3]);
+  final input = resultBytes.reshape([1, 128, 128, 3]);
   var output = List(1 * 29).reshape([1, 29]);
 
-  InterpreterOptions interpreterOptions = InterpreterOptions();
+  //InterpreterOptions interpreterOptions = InterpreterOptions();
 
   try {
-    Interpreter interpreter = await Interpreter.fromAsset(
-        '../Tensorflow_code/model.tflite',
-        options: InterpreterOptions());
+    final interpreter = await Interpreter.fromAsset('model.tflite');
     interpreter.run(input, output);
   } catch (e) {
     print("Error running model: " + e.toString());
@@ -56,12 +55,12 @@ Future<String> predicition(Uint8List imgAsList) async {
 
   double highestProbability = 0;
   String prediction;
-  int predIndex;
+  int predictionIndex;
   for (int i = 0; i < output[0].length; i++) {
     if (output[0][i] > highestProbability) {
       highestProbability = output[0][i];
-      predIndex = i;
+      predictionIndex = i;
     }
   }
-  return predsMap[predIndex];
+  return predictionsMap[predictionIndex];
 }

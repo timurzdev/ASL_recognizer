@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
           );
           flag = true;
           //classifier
-          //prediction = await classifier.classifyImage(image);
+          prediction = await classifier.classifyImage(image);
           setState(() {},
           );
         },
